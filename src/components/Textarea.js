@@ -14,7 +14,9 @@ const TextareaLabel = styled.label`
 const InnerTextarea = styled.textarea`
   ${tw`w-full tracking-paragraph opacity-90 bg-transparent text-main uppercase text-base h-32 md:h-48 border p-3 outline-none rounded`}
   resize: none;
-  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out,
+  transition:
+    border-color 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out,
     background-color 0.2s ease-in-out;
   border-color: ${({ error }) => (error ? colors.pink : colors.main)};
   border-width: ${({ error }) => (error ? 2 : 1)}px;

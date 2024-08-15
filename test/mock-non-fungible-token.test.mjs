@@ -1,9 +1,9 @@
-const { ethers } = require('hardhat');
-const chai = require('chai');
-const { solidity } = require('ethereum-waffle');
+import hardhat from 'hardhat';
+import { use, expect } from 'chai';
+import { solidity } from 'ethereum-waffle';
 
-chai.use(solidity);
-const { expect } = chai;
+const { ethers } = hardhat;
+use(solidity);
 
 describe('NFT To Be Killed', function () {
   let data = {

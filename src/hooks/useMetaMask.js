@@ -32,7 +32,9 @@ export default function useMetaMask() {
 
   // Request access to MetaMask account
   async function requestAccount() {
-    await window.ethereum.request({ method: 'eth_requestAccounts' });
+    if (hasEthereum()) {
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
+    }
   }
   const handleConnectWallet = (wallet) =>
     setConnectedWalletAddressState(wallet);

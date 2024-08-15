@@ -23,47 +23,41 @@
     "commit:pre": "npm run hardhat:test && npm run lint:fix && npm run build && npm run format && git add ."
   },
   "dependencies": {
-    "@emotion/react": "^11.4.1",
+    "@emotion/react": "latest",
     "@emotion/styled": "latest",
-    "@fontsource/source-sans-pro": "^4.5.0",
-    "@loadable/component": "^5.15.0",
-    "@openzeppelin/contracts": "^4.0.0",
-    "autoprefixer": "^10.2.5",
-    "concurrently": "^6.2.1",
-    "ethereum-org-website": "git+https://github.com/ethereum/ethereum-org-website.git",
+    "@fontsource/source-sans-pro": "latest",
+    "@openzeppelin/contracts": "latest",
+    "autoprefixer": "latest",
+    "concurrently": "latest",
     "gatsby": "latest",
     "gatsby-image": "latest",
-    "gatsby-plugin-compile-es6-packages": "latest",
     "gatsby-plugin-emotion": "latest",
     "gatsby-plugin-manifest": "latest",
-    "gatsby-plugin-react-helmet": "latest",
     "gatsby-plugin-sharp": "latest",
     "gatsby-source-filesystem": "latest",
-    "gatsby-transformer-sharp": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "react-helmet": "latest",
-    "tailwindcss": "^2.2.9",
-    "twin.macro": "^2.7.0",
-    "unfetch": "^4.2.0"
+    "tailwindcss": "latest",
+    "twin.macro": "latest",
+    "unfetch": "latest"
   },
   "devDependencies": {
-    "@babel/core": "latest",
-    "@loadable/babel-plugin": "^5.13.2",
-    "@loadable/webpack-plugin": "^5.15.1",
-    "@nomiclabs/hardhat-ethers": "^2.0.2",
-    "@nomiclabs/hardhat-waffle": "^2.0.1",
-    "babel-eslint": "^10.1.0",
-    "babel-loader": "latest",
+    "@babel/core": "^7.25.2",
+    "@babel/eslint-parser": "^7.25.1",
+    "@nomiclabs/hardhat-ethers": "latest",
+    "@nomiclabs/hardhat-waffle": "latest",
     "babel-preset-gatsby": "latest",
-    "chai": "^4.3.4",
+    "chai": "latest",
+    "dotenv": "^16.4.5",
+    "eslint": "^7.32.0",
     "eslint-plugin-filenames": "latest",
     "eslint-plugin-import": "latest",
     "eslint-plugin-react": "latest",
     "eslint-plugin-react-hooks": "latest",
-    "ethereum-waffle": "^3.4.0",
-    "ethers": "^5.4.6",
-    "hardhat": "^2.6.2",
+    "ethereum-waffle": "latest",
+    "ethers": "latest",
+    "hardhat": "latest",
+    "mocha": "latest",
     "pre-commit": "latest",
     "prettier": "latest"
   },
@@ -75,6 +69,7 @@
     "trailingComma": "es5"
   },
   "eslintConfig": {
+    "parser": "@babel/eslint-parser",
     "globals": {
       "tw": true,
       "artifacts": true,
@@ -97,6 +92,7 @@
       "node": true
     },
     "parserOptions": {
+      "requireConfigFile": false,
       "sourceType": "module",
       "ecmaVersion": 8
     },
@@ -124,9 +120,6 @@
     }
   },
   "babel": {
-    "plugins": [
-      "@loadable/babel-plugin"
-    ],
     "presets": [
       [
         "babel-preset-gatsby",
@@ -146,13 +139,7 @@
       "preset": "emotion"
     }
   },
-  "resolutions": {
-    "react-dom": "npm:@hot-loader/react-dom"
-  },
   "pre-commit": [
     "commit:pre"
-  ],
-  "engines": {
-    "node": "<=16"
-  }
+  ]
 }

@@ -90,7 +90,12 @@ const colors = {
   'pink-lightest': '#ffebef',
 };
 module.exports = {
-  purge: ['./src/**/*.{js,jsx,ts,tsx}'],
+  content: [
+    './public/index.html',
+    './src/**/*.{html,js}',
+    './pages/**/*.{html,js}',
+    './utils/**/*.{html,js}',
+  ],
   theme: {
     extend: {
       colors,

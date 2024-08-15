@@ -7,8 +7,11 @@ const SectionWrapper = styled.div`
   display: ${(props) => (props.showSection ? 'flex' : 'none')};
   opacity: ${(props) => (props.showSection ? 1 : 0)};
   transform: translateY(${(props) => (props.showSection ? 0 : 0.25)}rem);
-  transition: transform 0.325s ease-in-out, filter 0.325s ease-in-out,
-    opacity 0.325s ease-in-out, -webkit-transform 0.325s ease-in-out,
+  transition:
+    transform 0.325s ease-in-out,
+    filter 0.325s ease-in-out,
+    opacity 0.325s ease-in-out,
+    -webkit-transform 0.325s ease-in-out,
     -webkit-filter 0.325s ease-in-out;
   background-image: radial-gradient(rgba(0, 0, 0, 0.25) 25%, transparent 55%);
 `;
@@ -20,7 +23,9 @@ const SectionInner = styled.div`
   transform: scale(${(props) => (props.showSection ? 1 : 0.95)});
   z-index: ${(props) => (props.showSection ? 10 : -1)};
   width: 42rem;
-  transition: opacity 0.325s ease-in-out, transform 0.325s ease-in-out,
+  transition:
+    opacity 0.325s ease-in-out,
+    transform 0.325s ease-in-out,
     -webkit-transform 0.325s ease-in-out;
   min-height: 50vh;
   height: max-content;

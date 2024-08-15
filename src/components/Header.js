@@ -10,8 +10,11 @@ const ReaperWrapper = styled.div`
   display: ${(props) => (props.showHeader ? 'flex' : 'none')};
   opacity: ${(props) => (props.showHeader ? 1 : 0)};
   transform: translateY(${(props) => (props.showHeader ? 0 : 0.25)}rem);
-  transition: transform 0.325s ease-in-out, filter 0.325s ease-in-out,
-    opacity 0.325s ease-in-out, -webkit-transform 0.325s ease-in-out,
+  transition:
+    transform 0.325s ease-in-out,
+    filter 0.325s ease-in-out,
+    opacity 0.325s ease-in-out,
+    -webkit-transform 0.325s ease-in-out,
     -webkit-filter 0.325s ease-in-out;
   background-image: radial-gradient(rgba(0, 0, 0, 0.25) 25%, transparent 55%);
 `;
