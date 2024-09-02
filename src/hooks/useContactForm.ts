@@ -70,7 +70,10 @@ const useContactForm = () => {
   const handleContactFormSubmit = useCallback(
     () =>
       submittable &&
-      sendContactFormToEmail(formatEmail(contactForm as FormatEmail), handleContactFormReset),
+      sendContactFormToEmail(
+        formatEmail(contactForm as FormatEmail),
+        handleContactFormReset
+      ),
     [contactForm, submittable, handleContactFormReset]
   );
 

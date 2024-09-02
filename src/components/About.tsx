@@ -1,6 +1,7 @@
 import tw, { styled } from 'twin.macro';
 import { aboutCopy } from '../utils';
 import { ReapedImage } from '../assets';
+import * as React from 'react';
 
 const AboutSubTitle = tw.h2`relative text-lg md:text-xl text-main font-thin uppercase tracking-paragraph sm:tracking-title flex justify-center items-center h-full w-auto`;
 const AboutParagraph = tw.p`relative text-sm md:text-base text-main mb-3 font-thin uppercase tracking-paragraph w-full`;
@@ -12,7 +13,7 @@ const AboutImage = styled.div`
   min-width: 8rem;
 `;
 
-const About = () => (
+const About: React.FC = () => (
   <>
     <AboutTitleWrapper>
       <AboutSubTitle>{aboutCopy.subtitle}</AboutSubTitle>

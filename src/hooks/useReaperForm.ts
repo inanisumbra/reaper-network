@@ -15,8 +15,8 @@ const INITIAL_REAPER_FORM_ERRORS = {
 };
 
 const REAPER_FORM_VALIDATORS = {
-  token_id: (id:string) => !id?.length || /\d/g.test(id),
-  token_address: (address:string) =>
+  token_id: (id: string) => !id?.length || /\d/g.test(id),
+  token_address: (address: string) =>
     !address?.length || /^0X[a-fA-F0-9]{40}$/g.test(address),
 };
 
@@ -82,7 +82,7 @@ const useReaperForm = () => {
     handleReset,
     submittable,
     burned,
-    ...reaperForm,
+    reaperForm,
     ...reaperFormProps,
   };
 };

@@ -2,8 +2,9 @@ import Button, { Actions } from './Button';
 import Input, { MultiInputs } from './Input';
 import Textarea from './Textarea';
 import { useContactForm } from '../hooks';
+import * as React from 'react';
 
-const ContactForm = () => {
+const ContactForm: React.FC = () => {
   const {
     contactForm,
     errors,
@@ -12,9 +13,7 @@ const ContactForm = () => {
     handleSubmit,
     ...formProps
   } = useContactForm();
-  const { name,
-    email,
-    message } = contactForm;
+  const { name, email, message } = contactForm;
   return (
     <>
       <MultiInputs>

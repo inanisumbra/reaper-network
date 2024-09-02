@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes } from 'react';
+import * as React from 'react';
 import tw, { styled } from 'twin.macro';
 
 const StyledButton = styled.button`
@@ -22,7 +22,7 @@ const StyledButton = styled.button`
   hover:cursor-pointer
   hover:bg-secondary`}
   transition: background-color .2s ease-in-out,color .2s ease-in-out;
-  ${({ disabled }:{disabled?:boolean;}) =>
+  ${({ disabled }: { disabled?: boolean }) =>
     disabled
       ? `
     pointer-events: none;
@@ -48,25 +48,19 @@ const SecondaryButton = styled.button`
 
 export const Actions = tw.div`flex w-full items-center justify-between mt-auto pt-12`;
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
   secondary?: boolean;
   disabled?: boolean;
 }
 
-
-const Button = (props:ButtonProps) => {
+const Button: React.FC<ButtonProps> = (props) => {
   const { label, secondary, disabled, ...extraProps } = props;
   if (secondary) {
     return <SecondaryButton {...extraProps}>{label}</SecondaryButton>;
   }
   return <StyledButton {...extraProps}>{label}</StyledButton>;
-};
-
-
-Button.defaultProps = {
-  agreed: false,
-  label: '',
 };
 
 export default Button;

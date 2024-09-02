@@ -1,40 +1,24 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import tw, { styled } from 'twin.macro';
+import * as React from 'react';
+export interface ShowSectionProp {
+  showSection?: boolean;
+}
 
-const SectionWrapper = styled.div`
-  ${tw`relative flex-col items-center justify-center w-full h-screen`}
-  display: ${(props) => (props.showSection ? 'flex' : 'none')};
-  opacity: ${(props) => (props.showSection ? 1 : 0)};
-  transform: translateY(${(props) => (props.showSection ? 0 : 0.25)}rem);
-  transition:
-    transform 0.325s ease-in-out,
-    filter 0.325s ease-in-out,
-    opacity 0.325s ease-in-out,
-    -webkit-transform 0.325s ease-in-out,
-    -webkit-filter 0.325s ease-in-out;
-  background-image: radial-gradient(rgba(0, 0, 0, 0.25) 25%, transparent 55%);
-`;
-
-const SectionInner = styled.div`
-  ${tw`relative flex-col items-center px-5 md:px-8 pb-6 pt-8 md:pb-6 md:pt-10 bg-black-link rounded text-main text-base tracking-paragraph`}
-  display: ${(props) => (props.showSection ? 'flex' : 'none')};
-  opacity: ${(props) => (props.showSection ? 0.9 : 0)};
-  transform: scale(${(props) => (props.showSection ? 1 : 0.95)});
-  z-index: ${(props) => (props.showSection ? 10 : -1)};
-  width: 42rem;
-  transition:
-    opacity 0.325s ease-in-out,
-    transform 0.325s ease-in-out,
-    -webkit-transform 0.325s ease-in-out;
-  min-height: 50vh;
-  height: max-content;
-  justify-content: ${({ justifyEvenly }) =>
-    justifyEvenly ? 'space-evenly' : 'flex-start'};
-  @media (max-width: 700px) {
-    width: 95%;
-  }
-`;
+const SectionWrapper = styled.div(({ showSection }: ShowSectionProp) => [
+  tw`relative flex-col items-center justify-center w-full h-screen [display:none] opacity-0 translate-y-1
+  [transition: transform 0.325s ease-in-out, filter 0.325s ease-in-out, opacity 0.325s ease-in-out, -webkit-transform 0.325s ease-in-out, -webkit-filter 0.325s ease-in-out] [background-image: radial-gradient(rgba(0, 0, 0, 0.25) 25%, transparent 55%)]`,
+  showSection && tw`flex opacity-100 translate-y-0`,
+]);
+interface InnerProps extends ShowSectionProp {
+  justifyEvenly?: boolean;
+}
+const SectionInner = styled.div(
+  ({ showSection, justifyEvenly }: InnerProps) => [
+    tw`relative flex-col items-center px-5 md:px-8 pb-6 pt-8 md:pb-6 md:pt-10 bg-black-link rounded text-main text-base tracking-paragraph [display:none] opacity-0 scale-95 -z-1 md:[width:42rem] [width:95%] [min-height: 50vh] h-max justify-start`,
+    showSection && tw`flex opacity-90 scale-100 z-10`,
+    justifyEvenly && tw`justify-evenly`,
+  ]
+);
 
 const SectionTitle = tw.h2`relative text-main border-b border-main mb-8 pb-2 text-2xl tracking-title mr-auto uppercase`;
 
@@ -50,7 +34,15 @@ const CloseButton = styled.button`
   }
 `;
 
-const Section = (props) => {
+interface SectionProps {
+  name?: string;
+  active?: string;
+  children: any;
+  handleClose: () => void;
+  justifyEvenly?: boolean;
+}
+
+const Section: React.FC<SectionProps> = (props) => {
   const { name, active, children, handleClose, justifyEvenly } = props;
   if (name === active) {
     return (
@@ -66,13 +58,6 @@ const Section = (props) => {
     );
   }
   return <SectionWrapper />;
-};
-Section.propTypes = {
-  active: PropTypes.string,
-  children: PropTypes.any,
-  name: PropTypes.string,
-  handleClose: PropTypes.func,
-  justifyEvenly: PropTypes.bool,
 };
 
 export default Section;

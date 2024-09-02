@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import { Layout } from '../components';
 
 // ========================
-const IndexPage = () => <Layout>NOT FOUND</Layout>;
+const IndexPage: React.FC = () => <Layout>NOT FOUND</Layout>;
 
 export default IndexPage;
