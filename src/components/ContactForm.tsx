@@ -5,15 +5,16 @@ import { useContactForm } from '../hooks';
 
 const ContactForm = () => {
   const {
-    name,
-    email,
-    message,
+    contactForm,
     errors,
     submittable,
     handleReset,
     handleSubmit,
     ...formProps
   } = useContactForm();
+  const { name,
+    email,
+    message } = contactForm;
   return (
     <>
       <MultiInputs>

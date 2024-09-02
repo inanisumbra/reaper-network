@@ -2,7 +2,25 @@ import { useCallback } from 'react';
 import { default as useFormHandlers } from './useFormHandlers';
 import fetch from 'unfetch';
 
-const sendContactFormToEmail = (data, reset) =>
+interface FormatEmail {
+  name: string;
+  email: string;
+  message: string;
+}
+
+interface EmailData extends FormatEmail {
+  date: number;
+  html: string;
+}
+
+type ResetFn = () => void;
+
+export interface ContactForm {
+  name: string;
+  email: string;
+  message: string;
+}
+const sendContactFormToEmail = (data: EmailData, reset: ResetFn) =>
   fetch('/api/mailer', {
     method: 'POST', // or 'PUT'
     headers: {
@@ -11,7 +29,7 @@ const sendContactFormToEmail = (data, reset) =>
     body: JSON.stringify(data),
   }).then(() => reset());
 
-export const formatEmail = ({ name, email, message }) => ({
+export const formatEmail = ({ name, email, message }: FormatEmail) => ({
   name,
   email,
   message,
@@ -25,8 +43,8 @@ export const formatEmail = ({ name, email, message }) => ({
 });
 
 export const CONTACT_FORM_VALIDATORS = {
-  name: (value) => value && /[A-Za-z0-9]+/.test(value),
-  email: (email) => email && /\S+@\S+\.\S+/.test(email),
+  name: (value: string) => value && /[A-Za-z0-9]+/.test(value),
+  email: (email: string) => email && /\S+@\S+\.\S+/.test(email),
   message: () => true,
 };
 
@@ -41,6 +59,7 @@ const useContactForm = () => {
     form: contactForm,
     handleReset: handleContactFormReset,
     submittable,
+    errors,
     ...contactFormProps
   } = useFormHandlers(
     INITIAL_CONTACT_FORM,
@@ -51,7 +70,7 @@ const useContactForm = () => {
   const handleContactFormSubmit = useCallback(
     () =>
       submittable &&
-      sendContactFormToEmail(formatEmail(contactForm), handleContactFormReset),
+      sendContactFormToEmail(formatEmail(contactForm as FormatEmail), handleContactFormReset),
     [contactForm, submittable, handleContactFormReset]
   );
 
@@ -59,7 +78,8 @@ const useContactForm = () => {
     submittable,
     handleReset: handleContactFormReset,
     handleSubmit: handleContactFormSubmit,
-    ...contactForm,
+    errors,
+    contactForm,
     ...contactFormProps,
   };
 };

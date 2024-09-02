@@ -15,8 +15,8 @@ const INITIAL_REAPER_FORM_ERRORS = {
 };
 
 const REAPER_FORM_VALIDATORS = {
-  token_id: (id) => !id?.length || /\d/g.test(parseInt(id)),
-  token_address: (address) =>
+  token_id: (id:string) => !id?.length || /\d/g.test(id),
+  token_address: (address:string) =>
     !address?.length || /^0X[a-fA-F0-9]{40}$/g.test(address),
 };
 
@@ -45,9 +45,9 @@ const useReaperForm = () => {
       return;
     }
     await requestAccount();
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const provider = new ethers.providers.Web3Provider(window.ethereum as any);
     const contract = new ethers.Contract(
-      process.env.GATSBY_PUBLIC_REAPER_ADDRESS,
+      process.env.GATSBY_PUBLIC_REAPER_ADDRESS as string,
       Reaper.abi,
       provider
     );
@@ -63,7 +63,7 @@ const useReaperForm = () => {
         );
         setBurned(await contract.proofOfBurn(reaperTokenId));
         handleReset();
-      } catch (err) {
+      } catch (err: any) {
         console.error(err.message);
       }
     }

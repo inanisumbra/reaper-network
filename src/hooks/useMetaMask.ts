@@ -17,7 +17,7 @@ export default function useMetaMask() {
       return;
     }
     async function setConnectedWalletAddress() {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const provider = new ethers.providers.Web3Provider(window.ethereum as any);
       const signer = provider.getSigner();
       try {
         const signerAddress = await signer.getAddress();
@@ -33,10 +33,11 @@ export default function useMetaMask() {
   // Request access to MetaMask account
   async function requestAccount() {
     if (hasEthereum()) {
-      await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const provider = window.ethereum as any;
+      await provider.request({ method: 'eth_requestAccounts' });
     }
   }
-  const handleConnectWallet = (wallet) =>
+  const handleConnectWallet = (wallet:any) =>
     setConnectedWalletAddressState(wallet);
 
   return {

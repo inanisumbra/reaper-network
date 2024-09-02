@@ -26,6 +26,7 @@
     "@emotion/react": "latest",
     "@emotion/styled": "latest",
     "@fontsource/source-sans-pro": "latest",
+    "@metamask/providers": "^17.1.2",
     "@openzeppelin/contracts": "latest",
     "autoprefixer": "latest",
     "concurrently": "latest",
