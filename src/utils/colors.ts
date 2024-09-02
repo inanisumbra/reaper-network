@@ -1,4 +1,4 @@
-module.exports = {
+const colors = {
   primary: 'rgb(137,153,170)',
   secondary: '#adceff',
   tertiary: 'rgb(220, 240, 252)',
@@ -89,3 +89,4 @@ module.exports = {
   'pink-lighter': '#ffbbca',
   'pink-lightest': '#ffebef',
 };
+export default colors;

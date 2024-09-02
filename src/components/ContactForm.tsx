@@ -1,4 +1,3 @@
-import React from 'react';
 import Button, { Actions } from './Button';
 import Input, { MultiInputs } from './Input';
 import Textarea from './Textarea';
