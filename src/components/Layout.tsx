@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { css, Global } from '@emotion/react';
 import tw, { GlobalStyles as BaseStyles } from 'twin.macro';
 import { fade } from '../utils';
@@ -39,7 +38,7 @@ const GlobalStyle = css`
   }
 `;
 
-const Layout = ({ children, title, description }) => {
+const Layout: React.FC<{ children: any }> = ({ children }) => {
   return (
     <>
       <BaseStyles />
@@ -47,17 +46,6 @@ const Layout = ({ children, title, description }) => {
       {children}
     </>
   );
-};
-
-Layout.propTypes = {
-  children: PropTypes.any,
-  title: PropTypes.string,
-  description: PropTypes.string,
-};
-
-Layout.defaultProps = {
-  title: '',
-  description: '',
 };
 
 export default Layout;

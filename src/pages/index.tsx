@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {
   Layout,
   Header,
@@ -10,9 +10,9 @@ import {
 } from '../components';
 
 // ========================
-const IndexPage = () => {
+const IndexPage: React.FC = () => {
   const [active, setActive] = React.useState('');
-  const handleButtonClick = (name) => setActive(name);
+  const handleButtonClick = (name: string) => setActive(name);
   const handleClose = () => setActive('');
   return (
     <Layout>

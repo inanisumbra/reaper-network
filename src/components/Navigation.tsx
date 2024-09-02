@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import tw, { styled } from 'twin.macro';
 
 const NavigationWrapper = styled.ul`
@@ -18,7 +17,12 @@ const NavigationButton = styled.button`
   }
 `;
 
-const NavigationItem = (props) => {
+interface NavigationItemProps {
+  name: string;
+  handleButtonClick: (name: string) => void;
+}
+
+const NavigationItem: React.FC<NavigationItemProps> = (props) => {
   const { name, handleButtonClick } = props;
   const handleClick = () => handleButtonClick(name);
   return (
@@ -28,13 +32,16 @@ const NavigationItem = (props) => {
   );
 };
 
-NavigationItem.propTypes = {
-  handleButtonClick: PropTypes.func,
-  name: PropTypes.string,
-};
+interface NavigationProps {
+  handleButtonClick: any;
+  sectionNames?: string[];
+}
 
-const Navigation = (props) => {
-  const { handleButtonClick, sectionNames } = props;
+const Navigation: React.FC<NavigationProps> = (props) => {
+  const {
+    handleButtonClick,
+    sectionNames = ['intro', 'reaper', 'about', 'contact'],
+  } = props;
   const NavigationItems = sectionNames.map((name) => (
     <NavigationItem
       key={name}
@@ -43,15 +50,6 @@ const Navigation = (props) => {
     />
   ));
   return <NavigationWrapper>{NavigationItems}</NavigationWrapper>;
-};
-
-Navigation.propTypes = {
-  sectionNames: PropTypes.array,
-  handleButtonClick: PropTypes.func,
-};
-
-Navigation.defaultProps = {
-  sectionNames: ['intro', 'reaper', 'about', 'contact'],
 };
 
 export default Navigation;

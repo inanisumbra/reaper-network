@@ -1,20 +1,19 @@
-import React from 'react';
 import Button, { Actions } from './Button';
 import Input, { MultiInputs } from './Input';
 import Textarea from './Textarea';
 import { useContactForm } from '../hooks';
+import * as React from 'react';
 
-const ContactForm = () => {
+const ContactForm: React.FC = () => {
   const {
-    name,
-    email,
-    message,
+    contactForm,
     errors,
     submittable,
     handleReset,
     handleSubmit,
     ...formProps
   } = useContactForm();
+  const { name, email, message } = contactForm;
   return (
     <>
       <MultiInputs>

@@ -1,24 +1,28 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, ChangeEvent } from 'react';
+
+type Form = Record<string, any>;
+type FormErrors = Record<string, boolean>;
+type FormValidators = Record<string, any>;
 
 const INITIAL_FORM = { name: '' };
 const INITIAL_FORM_ERRORS = {
   name: false,
 };
 export const FORM_VALIDATORS = {
-  name: (value) => value && /[A-Za-z0-9]+/.test(value),
+  name: (value: string) => value && /[A-Za-z0-9]+/.test(value),
 };
 
 const useFormHandlers = (
-  initForm = INITIAL_FORM,
-  initFormErrors = INITIAL_FORM_ERRORS,
-  formValidators = FORM_VALIDATORS
+  initForm: Form = INITIAL_FORM,
+  initFormErrors: FormErrors = INITIAL_FORM_ERRORS,
+  formValidators: FormValidators = FORM_VALIDATORS
 ) => {
   const [form, setForm] = useState(initForm);
   const [formErrors, setFormErrors] = useState(initFormErrors);
   const [submittable, setSubmittable] = useState(false);
 
   const handleFormChange = useCallback(
-    (event) => {
+    (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       const { name, value } = event.target;
       if (name && value && value !== form[name]) {
         setForm({ ...form, [name]: value });
@@ -32,34 +36,32 @@ const useFormHandlers = (
     [form, formErrors]
   );
   const handleFormBlur = useCallback(
-    (event) => {
+    (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       const { name, value } = event.target;
-      if (name && value) {
-        setForm({ ...form, [name]: value });
-        setFormErrors({
-          ...formErrors,
-          [name]: !formValidators[name](value),
-        });
-      }
+      setFormErrors({
+        ...formErrors,
+        [name]: !formValidators[name](value),
+      });
+      handleFormChange(event);
     },
-    [form, formErrors, formValidators]
+    [formErrors, formValidators, handleFormChange]
   );
   const handleFormFocus = useCallback(
-    (event) => {
-      const { name, value } = event.target;
-      if (name && value) {
+    (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name } = event.target;
+      if (name && Object.keys(form).indexOf(name) !== -1) {
         setFormErrors({
           ...formErrors,
           [name]: false,
         });
       }
     },
-    [formErrors]
+    [formErrors, form]
   );
   const handleFormReset = useCallback(() => {
-    setForm(INITIAL_FORM);
-    setFormErrors(INITIAL_FORM_ERRORS);
-  }, []);
+    setForm(initForm);
+    setFormErrors(initFormErrors);
+  }, [initForm, initFormErrors]);
 
   return {
     form,

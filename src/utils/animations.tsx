@@ -59,7 +59,7 @@ const reaperFrames = keyframes`
 `;
 
 export const ReaperActions = styled.div`
-  ${tw`relative w-full h-96 bg-right bg-center bg-contain bg-no-repeat mt-auto`}
+  ${tw`relative w-full h-96 bg-center bg-contain bg-no-repeat mt-auto`}
   transition: background-image 2s ease-in-out,opacity .2s ease-in-out;
   animation: ${reaperFrames} linear 2s infinite;
   background-image: url(${ReaperStepOneImage});

@@ -1,18 +1,18 @@
-import React from 'react';
 import Button, { Actions } from './Button';
 import Input from './Input';
 import { useReaperForm } from '../hooks';
+import * as React from 'react';
 
-const ReaperForm = () => {
+const ReaperForm: React.FC = () => {
   const {
-    token_id,
-    token_address,
+    reaperForm,
     errors,
     submittable,
     handleSubmit,
     handleReset,
     ...inputProps
   } = useReaperForm();
+  const { token_id, token_address } = reaperForm;
   return (
     <>
       <Input
